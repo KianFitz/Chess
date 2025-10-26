@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
 project(ChessProject LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)     # Enable VS filters
+
+option (ChessProject_Vendored "Use vendored libs" OFF)
 
 if (MSVC)
     add_compile_options(/W4 /WX)
@@ -34,7 +36,11 @@ target_link_libraries(chess_server PRIVATE chess_shared)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src/Server PREFIX "Server" FILES ${SERVER_SRC})
 
 # ---------- Client ----------
-find_package(SDL3 REQUIRED)
+if (ChessProject_Vendored)
+    add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
+else()
+    find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
+endif()
 
 file(GLOB_RECURSE CLIENT_SRC CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/Client/*.cpp"

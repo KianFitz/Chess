@@ -1,15 +1,15 @@
 #include "Client.h"
 #include <string>
 
-
 std::string APP_NAME = "Chess Game";
 std::string APP_VERSION = "0.1";
 std::string APP_IDENTIFIER = "com.kianfitz.chessgame";
 
+int main(int argc, char** argv[]) {
+	argc;
+	argv;
 
-
-int main(int /*argc*/, char** /*argv[]*/) {
-
+	
 	Client client;
 	client.Start();
 

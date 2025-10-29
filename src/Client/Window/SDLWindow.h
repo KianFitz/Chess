@@ -2,11 +2,8 @@
 #define __H_SDLWINDOW
 
 #include <SDL3/SDL.h>
-#include <SDl3/SDL_main.h>
 #include <memory>
 #include "IWindow.h"
-
-
 
 struct SDLWindowDeleter 
 {

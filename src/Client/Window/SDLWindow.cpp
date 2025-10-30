@@ -19,21 +19,24 @@ bool SDLWindow::Create(const WindowCreationArgs& args)
 		// Do stuff
 	}
 
-	m_renderer = SDLRendererPtr(SDL_CreateRenderer(m_window.get(), nullptr));
+	m_baseRenderer = SDLRendererPtr(SDL_CreateRenderer(m_window.get(), nullptr));
 
-	if (!m_renderer)
+	if (!m_baseRenderer)
 	{
 		return false;
 	}
 
-	SDL_SetRenderLogicalPresentation(m_renderer.get(), args.ViewportWidth, args.ViewportHeight, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+	m_renderer = std::make_unique<SDLRenderer>();
+	m_renderer->SetBaseRenderer(m_baseRenderer.get());
+
+	SDL_SetRenderLogicalPresentation(m_baseRenderer.get(), args.ViewportWidth, args.ViewportHeight, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
 	SDL_ShowWindow(m_window.get());
 
 	return true;
 }
 
-void SDLWindow::Update()
+void SDLWindow::CheckForInput()
 {
 	SDL_Event event;
 
@@ -42,12 +45,9 @@ void SDLWindow::Update()
 		switch (event.type)
 		{
 		case SDL_EVENT_QUIT:
-			m_running = true;
+			m_running = false;
 		}
 	}
-
-	SDL_RenderClear(m_renderer.get());
-	SDL_RenderPresent(m_renderer.get());
 }
 
 void SDLWindow::Destroy()

@@ -1,15 +1,14 @@
 #include "Client.h"
+#include "Entities/Board.h"
 #include <string>
 
 std::string APP_NAME = "Chess Game";
 std::string APP_VERSION = "0.1";
 std::string APP_IDENTIFIER = "com.kianfitz.chessgame";
 
-int main(int argc, char** argv[]) {
-	argc;
-	argv;
 
-	
+int main(int /*argc*/, char** /*argv[]*/) {
+
 	Client client;
 	client.Start();
 
@@ -33,9 +32,23 @@ void Client::Start()
 		return;
 	}
 
+	/*		GAME SETUP		*/
+
+	Board newGame;
+
+
 	while (m_window->Running())
 	{
-		m_window->Update();
+		m_window->CheckForInput();
+		m_window->BeginDraw();
+		
+		// Game rendering logic here.
+		if (auto const& renderer = m_window->GetRenderer())
+		{
+			newGame.Draw(renderer);
+		}
+		
+		m_window->FinishDraw();
 	}
 
 	m_window->Destroy();

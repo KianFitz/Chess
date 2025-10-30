@@ -27,15 +27,10 @@ void Board::Draw(IRenderer const* renderer) const
 	{
 		for (uint32_t y = 0; y < AREA; ++y)
 		{
-			Vec2 rectPos;
-			rectPos.x = X_OFFSET + (x * 96);
-			rectPos.y = Y_OFFSET + (y * 96);
+			Vec2 rectPos(X_OFFSET + (x * TILE_SIZE), Y_OFFSET + (y * TILE_SIZE));
+			Vec2 rectSize(TILE_SIZE, TILE_SIZE);
 
-			Vec2 rectSize;
-			rectSize.x = TILE_SIZE;
-			rectSize.y = TILE_SIZE;
-
-			renderer->DrawRect(rectPos, rectSize, (x + y) % 2 == 0 ? BLACK: WHITE);
+			renderer->DrawRect(rectPos, rectSize, (x + y) % 2 == 0 ? BLACK : WHITE);
 		}
 	}
 

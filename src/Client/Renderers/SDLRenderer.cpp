@@ -1,6 +1,6 @@
 #include "SDLRenderer.h"
 
-void SDLRenderer::DrawRect(Vec2 pos, Vec2 size, RGB colour) const
+void SDLRenderer::DrawRect(const Vec2& pos, const Vec2& size, const RGB& colour) const
 {
 	SDL_FRect rect;
 	rect.x = pos.x;

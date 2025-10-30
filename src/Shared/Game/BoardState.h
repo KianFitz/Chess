@@ -4,7 +4,7 @@
 #include <bitset>
 #include <stack>
 
-constexpr auto BITBOARD_SIZE = 64;
+constexpr size_t BITBOARD_SIZE = 64;
 
 enum Piece
 {

@@ -7,7 +7,7 @@
 class IRenderer
 {
 public:
-	virtual void DrawRect(Vec2 pos, Vec2 size, RGB colour) const = 0;
+	virtual void DrawRect(const Vec2& pos, const Vec2& size, const RGB& colour) const = 0;
 };
 
 

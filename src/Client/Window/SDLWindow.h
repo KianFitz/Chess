@@ -6,6 +6,8 @@
 #include "IWindow.h"
 #include "../Renderers/IRenderer.h"
 #include "../Renderers/SDLRenderer.h"
+#include <vector>
+#include "../Entities/IDrawable.h"
 
 struct SDLWindowDeleter 
 {
@@ -32,24 +34,29 @@ using SDLRendererPtr = std::unique_ptr<SDL_Renderer, SDLRendererDeleter>;
 class SDLWindow : public IWindow
 {
 public:
-	SDLWindow() {}
 	bool Create(const WindowCreationArgs& args) override;
 	void CheckForInput() override;
 
 	void BeginDraw() override { SDL_RenderClear(m_baseRenderer.get()); }
 	void FinishDraw() override { 
-		SDL_SetRenderDrawColor(m_baseRenderer.get(), 0, 0, 0, 1);
+		SDL_SetRenderDrawColor(m_baseRenderer.get(), 255, 255, 255, 1);
 		SDL_RenderPresent(m_baseRenderer.get()); 
 	}
+
+	void Draw() override;
 
 	IRenderer* GetRenderer() const override { return m_renderer.get(); }
 
 	void Destroy() override;
+
+
+
 private:
 	SDLWindowPtr m_window;
 	SDLRendererPtr m_baseRenderer;
 
 	std::unique_ptr<SDLRenderer> m_renderer;
+
 };
 
 

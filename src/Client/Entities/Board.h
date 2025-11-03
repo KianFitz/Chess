@@ -3,7 +3,7 @@
 
 #include "IDrawable.h"
 
-class Board : IDrawable
+class Board : public IDrawable
 {
 public: 
 	void Draw(IRenderer const* renderer) const override;

@@ -50,6 +50,13 @@ void SDLWindow::CheckForInput()
 	}
 }
 
+void SDLWindow::Draw()
+{
+	for (auto const& child : m_children) {
+		child.get()->Draw(GetRenderer());
+	}
+}
+
 void SDLWindow::Destroy()
 {
 	

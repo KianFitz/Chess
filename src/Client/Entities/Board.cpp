@@ -23,9 +23,9 @@ void Board::Draw(IRenderer const* renderer) const
 {
 	assert(renderer);
 
-	for (uint32_t x = 0; x < AREA; ++x)
+	for (uint8_t x = 0; x < AREA; ++x)
 	{
-		for (uint32_t y = 0; y < AREA; ++y)
+		for (uint8_t y = 0; y < AREA; ++y)
 		{
 			Vec2 rectPos(X_OFFSET + (x * TILE_SIZE), Y_OFFSET + (y * TILE_SIZE));
 			Vec2 rectSize(TILE_SIZE, TILE_SIZE);
@@ -33,8 +33,6 @@ void Board::Draw(IRenderer const* renderer) const
 			renderer->DrawRect(rectPos, rectSize, (x + y) % 2 == 0 ? BLACK : WHITE);
 		}
 	}
-
-
 	
 	for (auto const& child : m_children)
 	{

@@ -40,6 +40,7 @@ if (ChessProject_Vendored)
     add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 else()
     find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
+    find_package(SDL3_image CONFIG REQUIRED)
 endif()
 
 file(GLOB_RECURSE CLIENT_SRC CONFIGURE_DEPENDS
@@ -48,7 +49,7 @@ file(GLOB_RECURSE CLIENT_SRC CONFIGURE_DEPENDS
 )
 
 add_executable(chess_client ${CLIENT_SRC})
-target_link_libraries(chess_client PRIVATE chess_shared SDL3::SDL3)
+target_link_libraries(chess_client PRIVATE chess_shared SDL3::SDL3 SDL3_image::SDL3_image)
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src/Client PREFIX "Client" FILES ${CLIENT_SRC})
 
 # ---------- Tests ----------

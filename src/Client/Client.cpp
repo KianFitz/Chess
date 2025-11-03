@@ -1,11 +1,8 @@
 #include "Client.h"
 #include "Entities/Board.h"
 #include <string>
-
-std::string APP_NAME = "Chess Game";
-std::string APP_VERSION = "0.1";
-std::string APP_IDENTIFIER = "com.kianfitz.chessgame";
-
+#include "Textures/SDLTextureMgr.h"
+#include "Entities/Piece.h"
 
 int main(int /*argc*/, char** /*argv[]*/) {
 
@@ -18,6 +15,7 @@ int main(int /*argc*/, char** /*argv[]*/) {
 void Client::Start()
 {
 	m_window = std::make_unique<SDLWindow>();
+	m_textureMgr = std::make_unique<SDLTextureMgr>();
 
 	WindowCreationArgs args{
 		.AppName = "Chess Game",
@@ -32,21 +30,36 @@ void Client::Start()
 		return;
 	}
 
-	/*		GAME SETUP		*/
+	if (auto const& renderer = m_window->GetRenderer())
+	{
+		m_textureMgr->LoadTexture(*renderer, "pawn_black", R"(C:\Users\kianf\Documents\Development\Chess\images\pieces\black\pawn-b.svg)");
+		m_textureMgr->LoadTexture(*renderer, "pawn_white", R"(C:\Users\kianf\Documents\Development\Chess\images\pieces\black\pawn-w.svg)");
+	}
 
-	Board newGame;
 
+	// ** DEBUG CODE ** //
+	auto const& texture = m_textureMgr->GetTexture("pawn_black");
+	if (!texture) return;
+
+	Piece blackPawn(*texture);
+	blackPawn.SetPos(750, 250);
 
 	while (m_window->Running())
 	{
 		m_window->CheckForInput();
 		m_window->BeginDraw();
+
+		m_window->AddChild<Board>();
+		m_window->AddChild<Piece>(*texture, Vec2(750, 250));
 		
-		// Game rendering logic here.
-		if (auto const& renderer = m_window->GetRenderer())
-		{
-			newGame.Draw(renderer);
-		}
+		//// Game rendering logic here.
+		//if (auto const& renderer = m_window->GetRenderer())
+		//{
+		//	chessBoard.Draw(renderer);
+		//	blackPawn.Draw(renderer);
+		//}
+
+		m_window->Draw();
 		
 		m_window->FinishDraw();
 	}

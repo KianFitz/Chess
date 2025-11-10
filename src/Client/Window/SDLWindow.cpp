@@ -1,6 +1,5 @@
 #include "SDLWindow.h"
 #include "../Entities/Board.h"
-#include <iostream>
 
 
 bool SDLWindow::Create(const WindowCreationArgs& args) 

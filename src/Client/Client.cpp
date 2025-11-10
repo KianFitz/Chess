@@ -51,18 +51,7 @@ void Client::Start()
 	{
 		m_window->CheckForInput();
 		m_window->BeginDraw();
-
-
-		
-		//// Game rendering logic here.
-		//if (auto const& renderer = m_window->GetRenderer())
-		//{
-		//	chessBoard.Draw(renderer);
-		//	blackPawn.Draw(renderer);
-		//}
-
 		m_window->Draw();
-		
 		m_window->FinishDraw();
 	}
 

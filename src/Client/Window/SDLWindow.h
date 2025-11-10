@@ -56,8 +56,6 @@ private:
 	SDLRendererPtr m_baseRenderer;
 
 	std::unique_ptr<SDLRenderer> m_renderer;
-
-	IDrawable* m_selectedObject;
 };
 
 

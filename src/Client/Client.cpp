@@ -44,13 +44,15 @@ void Client::Start()
 	Piece blackPawn(*texture);
 	blackPawn.SetPos(750, 250);
 
+	m_window->AddChild<Board>();
+	m_window->AddChild<Piece>(*texture, Vec2(750, 250));
+
 	while (m_window->Running())
 	{
 		m_window->CheckForInput();
 		m_window->BeginDraw();
 
-		m_window->AddChild<Board>();
-		m_window->AddChild<Piece>(*texture, Vec2(750, 250));
+
 		
 		//// Game rendering logic here.
 		//if (auto const& renderer = m_window->GetRenderer())

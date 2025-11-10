@@ -41,9 +41,6 @@ void Client::Start()
 	auto const& texture = m_textureMgr->GetTexture("pawn_black");
 	if (!texture) return;
 
-	Piece blackPawn(*texture);
-	blackPawn.SetPos(750, 250);
-
 	m_window->AddChild<Board>();
 	m_window->AddChild<Piece>(*texture, Vec2(750, 250));
 
